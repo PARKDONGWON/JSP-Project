@@ -45,7 +45,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button> 
- 가입     </div>
+     </div>
     </div>
   </div>
 </div>

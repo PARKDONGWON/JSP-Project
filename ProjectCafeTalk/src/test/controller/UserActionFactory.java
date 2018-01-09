@@ -1,7 +1,7 @@
 package test.controller;
 
 import test.action.HomeAction;
-
+import test.cafe.action.CafeListAction;
 import test.users.action.LoginAction;
 import test.users.action.LoginFormAction;
 import test.users.action.LogoutAction;
@@ -45,6 +45,8 @@ public class UserActionFactory {
 			action=new UsersUpdateAction();
 		}else if(command.equals("/users/private/delete")) {
 			action=new UsersDeleteAction();
+		}else if(command.equals("/cafe/list")) {
+			action=new CafeListAction();
 		}
 		return action;
 	}
