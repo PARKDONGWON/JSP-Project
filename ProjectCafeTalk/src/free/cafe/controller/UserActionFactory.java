@@ -1,5 +1,7 @@
 package free.cafe.controller;
 
+import free.action.HomeAction;
+import free.cafe.action.FreeCafeListAction;
 
 public class UserActionFactory {
 	private static UserActionFactory factory;
@@ -14,9 +16,11 @@ public class UserActionFactory {
 	// 요청처리를 할 Action 객체를 리턴해주는 메소드
 	public Action action(String command) {
 		Action action=null;
-		//if(command.equals("/home")) {
-			//action=new HomeAction();
-	//	}
+		if(command.equals("/home")) {
+			action=new HomeAction();
+		}else if(command.equals("/freecafe/list")) {
+			action=new FreeCafeListAction();
+		}
 		return action;
 	}
 }

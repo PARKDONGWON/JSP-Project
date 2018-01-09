@@ -10,7 +10,7 @@
 		<!-- 필터의 이름 정하기 -->
 		<filter-name>EncodingFilter</filter-name>
 		<!-- 필터가 어디에 있는지 명시하기 -->
-		<filter-class>test.filter.EncodingFilter</filter-class>
+		<filter-class>free.cafe.filter.EncodingFilter</filter-class>
 		<!-- 초기화 파라미터 설정 -->
 		<init-param>
 			<param-name>encoding</param-name>
