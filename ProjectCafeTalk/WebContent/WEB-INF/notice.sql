@@ -3,10 +3,10 @@ create table board_notice
 writer varchar2(100), 
 title varchar2(100), 
 smallTitle varchar2(100), 
-contetne CLOB, 
+content CLOB, 
 viewCount number, 
-regdate DATE, 
-viewlike number)
+regdate DATE
+);
 
 create sequence board_notice_seq;
 
