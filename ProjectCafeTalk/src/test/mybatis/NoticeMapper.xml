@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+	<select id="getList" parameterType="noticeDto" resultType="noticeDto">
+		Select (num, writer, title, content, viewCount, regdate) from board_notice	
+	</select>
+	<insert id="insert" parameterType="noticeDto" >
+		Insert into board_notice
+		(num, writer, title, content, viewCount, regdate)
+		values (board_cafe_seq.NEXTVAL, 
+		#{writer}, #{title}, #{content}, #{viewCount}, SYSDATE)
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
