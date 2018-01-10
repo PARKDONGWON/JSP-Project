@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,11 +73,17 @@ keyframes blink {
 color
 
 
+
+
 :
+
 
  
 
+
 yellow
+
+
 
 
 ;
@@ -143,7 +149,7 @@ footer {
 					</span>
 				</div>
 			</div>
-<!-- 메인 영역------------------>
+			<!-- 메인 영역------------------>
 			<div class="col-sm-9">
 				<h2>공지사항</h2>
 				<table class="table table-striped table-bordered table-hover">
@@ -158,19 +164,19 @@ footer {
 					</thead>
 					<tbody>
 						<c:forEach var="tmp" items="${list }">
-						<tr>
-							<td>${tmp.num }</td>
-							<td><a href="noticeDetail.do?num=${tmp.num }">${tmp.title }</a></td>
-							<td>${tmp.writer }</td>
-							<td>${tmp.regdate }</td>
-							<td>${tmp.viewCount }</td>
-						</tr>
+							<tr>
+								<td>${tmp.num }</td>
+								<td><a href="noticeDetail.do?num=${tmp.num }">${tmp.title }</a></td>
+								<td>${tmp.writer }</td>
+								<td>${tmp.regdate }</td>
+								<td>${tmp.viewCount }</td>
+							</tr>
 						</c:forEach>
 					</tbody>
-				</table>	
-<!-- 페이지네이션 -->				
-				<ul class="pagination">
-							<c:choose>
+				</table>
+				<!-- 페이지네이션 -->
+	<ul class="pagination">
+		<c:choose>
 			<c:when test="${startPageNum ne 1 }">
 				<li>
 					<a href="list.do?pageNum=${startPageNum-1 }">&laquo;</a>
@@ -189,7 +195,7 @@ footer {
 					<li class="active"><a href="list.do?pageNum=${i }&condition=${condition}&keyword=${keyword}">${i }</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="list.do?pageNum=${i }">${i }</a></li>
+					<li><a href="private/adminNoticeList.do?pageNum=${i }">${i }</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
@@ -206,7 +212,7 @@ footer {
 			</c:otherwise>
 		</c:choose>
 	</ul>
-	
+	<!-- 검색어 관련 form -->
 	<form action="list.do" method="post">
 		<label for="condition">검색조건</label>
 		<select name="condition" id="condition">
@@ -217,15 +223,14 @@ footer {
 		<input value="${keyword }" type="text" name="keyword" placeholder="검색어"/>
 		<button type="submit">검색</button>
 	</form>
-
-<!-- 글쓰기 버튼 -->	
+				<!-- 글쓰기 버튼 -->
 				<div>
 					<a href="private/adminNoticeInsertForm.do">글쓰기</a>
 				</div>
 			</div>
 		</div>
-	</div>	
-<!-- footer 영역 -->
+	</div>
+	<!-- footer 영역 -->
 	<footer class="container-fluid">
 		<p>Footer Text</p>
 	</footer>

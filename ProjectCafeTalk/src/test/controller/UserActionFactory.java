@@ -1,11 +1,14 @@
 package test.controller;
 
 import test.action.HomeAction;
+import test.notice.action.NoticeCommentInsertAction;
 import test.notice.action.NoticeDeleteAction;
 import test.notice.action.NoticeDetailAction;
 import test.notice.action.NoticeInsertAction;
 import test.notice.action.NoticeInsertFormAction;
 import test.notice.action.NoticeListAction;
+import test.notice.action.NoticeUpdateAction;
+import test.notice.action.NoticeUpdateFormAction;
 import test.users.action.LoginAction;
 import test.users.action.LoginFormAction;
 import test.users.action.LogoutAction;
@@ -51,6 +54,8 @@ public class UserActionFactory {
 			action=new UsersDeleteAction();
 		}else if(command.equals("/notice/noticelist")) {
 			action=new NoticeListAction();
+		}else if(command.equals("/notice/private/adminNoticeList")) {
+			action=new NoticeListAction();
 		}else if(command.equals("/notice/private/adminNoticeInsertForm")){
 			action=new NoticeInsertFormAction();
 		}else if(command.equals("/notice/private/noticeInsert")) {
@@ -59,6 +64,12 @@ public class UserActionFactory {
 			action=new NoticeDetailAction();
 		}else if(command.equals("/notice/private/adminNoticeDelete")) {
 			action=new NoticeDeleteAction();
+		}else if(command.equals("/notice/private/adminNoticeUpdateForm")) {
+			action = new NoticeUpdateFormAction();
+		}else if(command.equals("/notice/private/noticeUpdate")) {
+			action = new NoticeUpdateAction();
+		}else if(command.equals("/notice/comment_insert")) {
+			action = new NoticeCommentInsertAction();
 		}
 		return action;
 	}

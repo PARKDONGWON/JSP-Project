@@ -16,7 +16,9 @@ public class NoticeDeleteAction extends Action{
 		int num = Integer.parseInt(request.getParameter("num"));
 		System.out.println("num : "+num);
 		NoticeDao.getInstance().delete(num);
-		ActionForward af = new ActionForward("/notice/private/adminNoticeList.jsp");
+		
+		ActionForward af=new ActionForward("/notice/private/adminNoticeList.do");
+		af.setRedirect(true);
 		return af;
 	}
 

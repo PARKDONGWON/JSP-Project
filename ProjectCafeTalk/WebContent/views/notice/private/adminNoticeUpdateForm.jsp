@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>views/notice/noticeDetail.jsp</title>
+<title>views/notice/private/adminNoticeInsertForm.jsp</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -14,6 +13,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/
+	SmartEditor/js/HuskyEZCreator.js"></script>
 <style>
 #container {
 	width: 70%;
@@ -67,9 +69,17 @@ div>#paging {
 keyframes blink {
 	from {color: white;
 }
+
 30%
 {
-color: yellow;
+color
+ 
+:
+ 
+yellow
+
+
+;
 }
 to {
 	color: red;
@@ -79,7 +89,6 @@ to {
       30% {color: yellow;}
       100% {color:red; font-weight: bold;} */
 }
-
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
 .row.content {
 	height: 1500px
@@ -134,78 +143,35 @@ footer {
 			</div>
 			<!-- 메인 영역------------------>
 			<div class="col-sm-9">
-				<h3>공지사항 디테일페이지</h3>
-				<table>
-					<tr>
-						<th>글번호</th>
-						<td>${dto.num }</td>
-					</tr>
-					<tr>
-						<th>작성자</th>
-						<td>${dto.writer }</td>
-					</tr>
-					<tr>
-						<th>제목</th>
-						<td>${dto.title }</td>
-					</tr>
-					<tr>
-						<th>내용</th>
-						<td>${dto.content }</td>
-					</tr>
-				</table>
-				<!-- 덧글 목록 출력하기 -->
-<div class="comments">
-	<c:forEach var="tmp" items="${commentList }">
-		<div class="comment" <c:if test="${tmp.num ne tmp.comment_group }">style="margin-left:100px"</c:if> >
-			<c:if test="${tmp.num ne tmp.comment_group }">
-				<div class="reply_icon"></div>
-			</c:if>
-			<div>
-				from <strong>${tmp.writer }</strong>${tmp.regdate }<br/>
-				to <strong>${tmp.target_id }</strong>
-				<a href="javascript:">답글</a>
-			</div>
-			<textarea rows="1" cols="100" disabled>${tmp.content }</textarea>
-			<form action="comment_insert.do" method="post">
-				<!-- 덧글 작성자 -->
-				<input type="hidden" name="writer" value="${id }"/>
-				<!-- 덧글 그룹 -->
-				<input type="hidden" name="ref_group" value="${dto.num }" />
-				<!-- 덧글 대상 -->
-				<input type="hidden" name="target_id" value="${tmp.writer }" />
-				<input type="hidden" name="comment_group" value="${tmp.comment_group }" />
-				<textarea rows="1" cols="100" name="content"></textarea>
-				<button type="submit">등록</button>
-			</form>		
-		</div>
-	</c:forEach>
-</div>
+				<h2>공지사항을 입력하세요.</h2>
+				<form action="noticeUpdate.do" method="post">
+					<input type="hidden" name="num" value="${dto.num }" />
+					<table>
+					
+						<tr>
+							<th>글번호</th>
+							<td>${dto.num }</td>
+						</tr>
+						<tr>
+							<th>작성자</th>
+							<td>${dto.writer }</td>
+						</tr>
+						<tr>
+							<th>제목</th>
+							<td><input type="text" name="title" value="${dto.title }" /></td>
+						</tr>
+						<tr>
+							<th>조회수</th>
+							<td>${dto.viewCount }</td>
+						</tr>
+					</table>
 
-<!-- 원글에 대한 덧글 입력 폼 -->
-<div class="comment_form">
-	<form action="comment_insert.do" method="post">
-		<!-- 덧글 작성자 -->
-		<input type="hidden" name="writer" value="${id }"/>
-		<!-- 덧글 그룹 -->
-		<input type="hidden" name="ref_group" value="${dto.num }" />
-		<!-- 덧글 대상 -->
-		<input type="hidden" name="target_id" value="${dto.writer }" />
-		<textarea rows="1" cols="100" name="content"></textarea>
-		<button type="submit">등록</button>
-	</form>
-</div>
-				<!-- 관리자가 로그인하였다면 수정과 삭제 버튼을 보이게 한다. -->
-				<c:if test="${id eq 'admin' }">
+					<textarea name="ir1" id="ir1"
+						style="width: 766px; height: 412px; display: none">${dto.content }</textarea>
 					<div>
-						<a href="private/adminNoticeUpdateForm.do?num=${dto.num}">수정</a>
+						<input type="button" onclick="submitContents(this);" value="수정확인" />
 					</div>
-					<div>
-						<a href="javascript:deleteCheck()">삭제</a>
-					</div>
-				</c:if>
-					<div>
-						<a href="noticelist.do">목록으로</a>
-					</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -213,14 +179,62 @@ footer {
 	<footer class="container-fluid">
 		<p>Footer Text</p>
 	</footer>
-</body>
-<script src="/resources/jquery-3.2.1.js"></script>
-<script>
-	function deleteCheck() {
-		var isDelete = confirm("삭제 하시겠습니까?");
-		if (isDelete) {
-			location.href = "private/adminNoticeDelete.do?num=${dto.num}";
+
+	<script>
+		var oEditors = [];
+
+		//추가 글꼴 목록
+		//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+
+		nhn.husky.EZCreator
+				.createInIFrame({
+					oAppRef : oEditors,
+					elPlaceHolder : "ir1",
+					sSkinURI : "${pageContext.request.contextPath}/SmartEditor/SmartEditor2Skin.html",
+					htParams : {
+						bUseToolbar : true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+						bUseVerticalResizer : true, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+						bUseModeChanger : true, // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+						//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+						fOnBeforeUnload : function() {
+							//alert("완료!");
+						}
+					}, //boolean
+					fOnAppLoad : function() {
+						//예제 코드
+						//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+					},
+					fCreator : "createSEditor2"
+				});
+
+		function pasteHTML() {
+			var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+			oEditors.getById["ir1"].exec("PASTE_HTML", [ sHTML ]);
 		}
-	}
-</script>
+
+		function showHTML() {
+			var sHTML = oEditors.getById["ir1"].getIR();
+			alert(sHTML);
+		}
+
+		function submitContents(elClickedObj) {
+			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
+			alert("공지사항이 수정 되었습니다.");
+			// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+
+			//검증후 폼의 전송을 막고 싶으면 return false; 
+
+			try {
+				elClickedObj.form.submit();//폼전송
+			} catch (e) {
+			}
+		}
+
+		function setDefaultFont() {
+			var sDefaultFont = '궁서';
+			var nFontSize = 24;
+			oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+		}
+	</script>
+</body>
 </html>

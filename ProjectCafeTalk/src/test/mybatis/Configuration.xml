@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<typeAlias type="test.users.dto.UsersDto" alias="usersDto"/>
 		<typeAlias type="test.notice.dto.NoticeDto" alias="noticeDto"/>
+		<typeAlias type="test.notice.dto.NoticeCommentDto" alias="noticeCommentDto"/>
 		
 	</typeAliases>
 	
@@ -31,6 +32,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mappers>
 		<mapper resource="test/mybatis/UsersMapper.xml"/>
 		<mapper resource="test/mybatis/NoticeMapper.xml"/>
+		<mapper resource="test/mybatis/NoticecommentMapper.xml"/>
 	</mappers>	
 </configuration>
 
