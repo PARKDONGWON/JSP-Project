@@ -20,6 +20,19 @@ public class NoticeDao {
 		}
 		return dao;
 	}
+	//공지사항 삭제 하는 메소드
+	public void delete(int num) {
+		SqlSession session = null;
+		try {
+			session=factory.openSession(true);
+			session.delete("notice.delete", num);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+	}
 	
 	//공지사항 목록을 보여주는 메소드
 	public List<NoticeDto> getList(NoticeDto dto) {
@@ -47,4 +60,20 @@ public class NoticeDao {
 			session.close();
 		}
 	}
+	
+	//공지사항 디테일
+	public NoticeDto getData(int num) {
+		SqlSession session = null;
+		NoticeDto resultDto = null;
+		try {
+			session = factory.openSession();
+			resultDto = session.selectOne("notice.getData", num);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return resultDto;
+	}
+	
 }

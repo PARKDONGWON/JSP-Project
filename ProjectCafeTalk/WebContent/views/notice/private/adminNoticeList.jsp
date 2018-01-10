@@ -160,23 +160,75 @@ footer {
 						<c:forEach var="tmp" items="${list }">
 						<tr>
 							<td>${tmp.num }</td>
-							<td>${tmp.title }</td>
+							<td><a href="noticeDetail.do?num=${tmp.num }">${tmp.title }</a></td>
 							<td>${tmp.writer }</td>
 							<td>${tmp.regdate }</td>
 							<td>${tmp.viewCount }</td>
 						</tr>
 						</c:forEach>
 					</tbody>
-				</table>
+				</table>	
+<!-- 페이지네이션 -->				
+				<ul class="pagination">
+							<c:choose>
+			<c:when test="${startPageNum ne 1 }">
+				<li>
+					<a href="list.do?pageNum=${startPageNum-1 }">&laquo;</a>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<li class="disabled">
+					<a href="javascript:">&laquo;</a>
+				</li>
+			</c:otherwise>
+		</c:choose>
+		<c:forEach var="i" begin="${startPageNum }" 
+				end="${endPageNum }">	
+			<c:choose>
+				<c:when test="${i eq pageNum }">
+					<li class="active"><a href="list.do?pageNum=${i }&condition=${condition}&keyword=${keyword}">${i }</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="list.do?pageNum=${i }">${i }</a></li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:choose>
+			<c:when test="${endPageNum lt totalPageCount }">
+				<li>
+					<a href="list.do?pageNum=${endPageNum+1 }">&raquo;</a>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<li class="disabled">
+					<a href="javascript:">&raquo;</a>
+				</li>
+			</c:otherwise>
+		</c:choose>
+	</ul>
+	
+	<form action="list.do" method="post">
+		<label for="condition">검색조건</label>
+		<select name="condition" id="condition">
+			<option value="titlecontent" <c:if test="${condition eq 'titlecontent' }">selected</c:if> >제목+내용</option>
+			<option value="title" <c:if test="${condition eq 'title' }">selected</c:if>>제목</option>
+			<option value="writer" <c:if test="${condition eq 'writer' }">selected</c:if>>작성자</option>
+		</select>
+		<input value="${keyword }" type="text" name="keyword" placeholder="검색어"/>
+		<button type="submit">검색</button>
+	</form>
+
+<!-- 글쓰기 버튼 -->	
 				<div>
 					<a href="private/adminNoticeInsertForm.do">글쓰기</a>
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 <!-- footer 영역 -->
 	<footer class="container-fluid">
 		<p>Footer Text</p>
 	</footer>
 </body>
+
 </html>

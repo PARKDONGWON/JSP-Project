@@ -145,9 +145,7 @@ footer {
 					<textarea name="ir1" id="ir1"
 						style="width: 766px; height: 412px; display: none"></textarea>
 					<div>
-						<input type="button" onclick="submitContents(this);"
-							value="서버로 내용 전송" /> <input type="button"
-							onclick="setDefaultFont();" value="기본 폰트 지정하기 (궁서_24)" />
+						<input type="button" onclick="submitContents(this);" value="글쓰기" /> 
 					</div>
 				</form>
 			</div>
@@ -157,7 +155,10 @@ footer {
 	<footer class="container-fluid">
 		<p>Footer Text</p>
 	</footer>
+
 <script>
+
+
 var oEditors = [];
 
 //추가 글꼴 목록
@@ -195,7 +196,7 @@ function showHTML() {
 	
 function submitContents(elClickedObj) {
 	oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
-	
+	alert("공지사항이 등록 되었습니다.");
 	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
 	
 	//검증후 폼의 전송을 막고 싶으면 return false; 
@@ -210,8 +211,6 @@ function setDefaultFont() {
 	var nFontSize = 24;
 	oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
 }
-
-
 
 </script>	
 </body>

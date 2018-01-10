@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>views/notice/noticelist.jsp</title>
+<title>views/notice/noticeDetail.jsp</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -73,11 +73,17 @@ keyframes blink {
 color
 
 
+
+
 :
+
 
  
 
+
 yellow
+
+
 
 
 ;
@@ -143,37 +149,49 @@ footer {
 					</span>
 				</div>
 			</div>
-<!-- 메인 영역------------------>
+			<!-- 메인 영역------------------>
 			<div class="col-sm-9">
-				<h2>공지사항</h2>
-				<table class="table table-striped table-bordered table-hover">
-					<thead>
-						<tr>
-							<th width="10%">번호</th>
-							<th width="50%">제목</th>
-							<th width="10%">작성자</th>
-							<th width="20%">작성일</th>
-							<th width="10%">조회</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="tmp" items="${list }">
-						<tr>
-							<td>${tmp.num }</td>
-							<td><a href="noticeDetail.do?num=${tmp.num }&condition=${condition}&keyword=${keyword}">${tmp.title }</a></td>
-							<td>${tmp.writer }</td>
-							<td>${tmp.regdate }</td>
-							<td>${tmp.viewCount }</td>
-						</tr>
-						</c:forEach>
-					</tbody>
+				<h3>공지사항 디테일페이지</h3>
+				<table>
+					<tr>
+						<th>글번호</th>
+						<td>${dto.num }</td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td>${dto.writer }</td>
+					</tr>
+					<tr>
+						<th>제목</th>
+						<td>${dto.title }</td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td>${dto.content }</td>
+					</tr>
 				</table>
+				<!-- 관리자가 로그인하였다면 수정과 삭제 버튼을 보이게 한다. -->
+				<c:if test="${id eq 'admin' }">
+					<div><a href="private/adminNoticeUpdate.do?num=${dto.num}">수정</a></div>
+					<div><a href="private/adminNoticeDelete.do?num=${dto.num}">삭제</a></div>
+					<div><a href="javascript:deleteCheck()">삭제</a></div>
+				</c:if>
 			</div>
 		</div>
 	</div>
-<!-- footer 영역 -->
+	<!-- footer 영역 -->
 	<footer class="container-fluid">
 		<p>Footer Text</p>
 	</footer>
 </body>
+<script src="/resources/jquery-3.2.1.js"></script>
+<script>
+
+function deleteCheck(){
+	var isDelete=confirm("삭제 하시겠습니까?");
+	if(isDelete){
+		location.href="private/adminNoticeDelete.do?num=${dto.num}";
+	}
+}
+</script>
 </html>

@@ -1,15 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
+		<sql id="cafeColumns">
+		num,writer,title,content,viewCount,
+		TO_CHAR(regdate, 'YY.MM.DD HH24:MI') AS regdate
+		</sql>
+	
 	<select id="getList" parameterType="noticeDto" resultType="noticeDto">
-		Select * from board_notice	
+		Select * from board_notice 
 	</select>
-	<insert id="insert" parameterType="noticeDto" >
-		Insert into board_notice
+	
+	<insert id="insert" parameterType="noticeDto">
+		INSERT INTO board_cafe
 		(num, writer, title, content, viewCount, regdate)
-		values (board_cafe_seq.NEXTVAL, 
+		VALUES(board_cafe_seq.NEXTVAL, 
 		#{writer}, #{title}, #{content}, #{viewCount}, SYSDATE)
 	</insert>
+	
+	<select id="getData" parameterType="noticeDto"
+	 	resultType="noticeDto">
+	 	SELECT result1.*
+	 	FROM
+		 	( SELECT <include refid="cafeColumns"/>,
+		 	LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum,
+		 	LAG(num, 1, 0) OVER(ORDER BY num DESC) prevNum
+		 	FROM board_cafe
+		 	<where>
+				<if test="writer != null">
+					OR writer LIKE '%'||#{writer}||'%'
+				</if>
+				<if test="title != null">
+					OR title LIKE '%'||#{title}||'%'
+				</if>
+				<if test="content != null">
+					OR content LIKE '%'||#{content}||'%'
+				</if>
+			</where>
+		 	ORDER BY num DESC ) result1
+	 	WHERE num=#{num}
+	 </select>
+	
+	<delete id="delete" parameterType="int" >
+		delete from board_notice where num=#{num}
+	</delete>
+	
+	
 </mapper>
 
 
