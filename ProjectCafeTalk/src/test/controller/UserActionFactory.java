@@ -1,7 +1,13 @@
 package test.controller;
 
 import test.action.HomeAction;
-import test.cafe.action.CafeListAction;
+import test.notice.action.NoticeInsertAction;
+import test.notice.action.NoticeInsertFormAction;
+import test.notice.action.NoticeListAction;
+import test.suggestion.action.SuggestionInsertAction;
+import test.suggestion.action.SuggestionInsertFormAction;
+import test.suggestion.action.SuggestionListAction;
+
 import test.users.action.LoginAction;
 import test.users.action.LoginFormAction;
 import test.users.action.LogoutAction;
@@ -45,8 +51,18 @@ public class UserActionFactory {
 			action=new UsersUpdateAction();
 		}else if(command.equals("/users/private/delete")) {
 			action=new UsersDeleteAction();
-		}else if(command.equals("/cafe/list")) {
-			action=new CafeListAction();
+		}else if(command.equals("/notice/noticelist")) {
+			action=new NoticeListAction();
+		}else if(command.equals("/notice/private/adminNoticeInsertForm")){
+			action=new NoticeInsertFormAction();
+		}else if(command.equals("/notice/private/noticeInsert")) {
+			action=new NoticeInsertAction();
+		}else if(command.equals("/suggestion/suggestion_list")) {
+			action=new SuggestionListAction();
+		}else if(command.equals("/suggestion/suggestion_insert_form")) {
+			action=new SuggestionInsertFormAction();
+		}else if(command.equals("/suggestion/suggestion_list")) {
+			action=new SuggestionInsertAction();
 		}
 		return action;
 	}

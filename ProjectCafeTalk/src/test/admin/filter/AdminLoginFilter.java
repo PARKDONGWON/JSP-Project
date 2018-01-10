@@ -1,4 +1,4 @@
-package test.filter;
+package test.admin.filter;
 
 import java.io.IOException;
 
@@ -20,8 +20,8 @@ import test.controller.ActionForward;
  *  - javax.servlet.Filter 인터페이스를 구현해서 만든다.
  */
 
-@WebFilter({ "/users/private/*", "/cafe/private/*", "/file/private/*", "/notice/*" })
-public class LoginFilter implements Filter {
+@WebFilter({"/notice/private/*"})
+public class AdminLoginFilter implements Filter {
 
 	@Override
 	public void destroy() {
@@ -43,14 +43,11 @@ public class LoginFilter implements Filter {
 		// 원래 요청 uri(url) 정보 얻어오기
 		String url = request.getRequestURI();
 		// session 에 로그인 정보가 있는지 여부를 확인해서
-		if (session.getAttribute("id") == null) {
-			// 로그인 페이지의 경로 구성
-			String path = cPath + "/users/login_form.do?url=" + url;
-			// 로그인 페이지로 이동 시킨다.
-			response.sendRedirect(path);
-		} else {
-			// 원래 하려던 작업 진행 시키기
+		if (session.getAttribute("id").equals("admin")) {
 			chain.doFilter(req, res);
+		} else {
+			String path = cPath + "/users/login_form.do?url=" + url;
+			response.sendRedirect(path);
 		}
 	}
 
