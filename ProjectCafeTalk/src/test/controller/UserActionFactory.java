@@ -1,6 +1,8 @@
 package test.controller;
 
 import test.action.HomeAction;
+import test.notice.action.NoticeInsertAction;
+import test.notice.action.NoticeInsertFormAction;
 import test.notice.action.NoticeListAction;
 import test.users.action.LoginAction;
 import test.users.action.LoginFormAction;
@@ -47,6 +49,10 @@ public class UserActionFactory {
 			action=new UsersDeleteAction();
 		}else if(command.equals("/notice/noticelist")) {
 			action=new NoticeListAction();
+		}else if(command.equals("/notice/private/adminNoticeInsertForm")){
+			action=new NoticeInsertFormAction();
+		}else if(command.equals("/notice/private/noticeInsert")) {
+			action=new NoticeInsertAction();
 		}
 		return action;
 	}
