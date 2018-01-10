@@ -20,6 +20,7 @@ public class LoginFormAction extends Action{
 		}
 		// url 을 request 에 담는다.
 		request.setAttribute("url", url);
+		System.out.println("loginForm!!!!");
 		
 		// view 페이지로 forward 이동 
 		return new ActionForward("/views/users/login_form.jsp");

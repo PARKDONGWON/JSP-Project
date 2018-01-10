@@ -10,7 +10,10 @@ public class SuggestionInsertFormAction extends Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+	
 		
+		
+		System.out.println("InsertForm!!!");
 		return new ActionForward("/views/suggestion/private/insert_form.jsp");
 	}
 

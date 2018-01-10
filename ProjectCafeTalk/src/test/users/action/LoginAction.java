@@ -37,6 +37,7 @@ public class LoginAction extends Action{
 		request.setAttribute("url", url);
 		request.setAttribute("isValid", isValid);
 		
+		System.out.println("loginAction!!!!!!");
 		//3. 응답한다.
 		return new ActionForward("/views/users/login_result.jsp");
 	}

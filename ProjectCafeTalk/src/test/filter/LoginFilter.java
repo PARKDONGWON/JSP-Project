@@ -20,7 +20,7 @@ import test.controller.ActionForward;
  *  - javax.servlet.Filter 인터페이스를 구현해서 만든다.
  */
 
-@WebFilter({ "/users/private/*", "/cafe/private/*", "/file/private/*", "/notice/*" })
+@WebFilter({ "/users/private/*", "/cafe/private/*", "/file/private/*", "/notice/*", })
 public class LoginFilter implements Filter {
 
 	@Override

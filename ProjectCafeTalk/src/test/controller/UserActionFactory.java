@@ -4,7 +4,7 @@ import test.action.HomeAction;
 import test.notice.action.NoticeInsertAction;
 import test.notice.action.NoticeInsertFormAction;
 import test.notice.action.NoticeListAction;
-import test.suggestion.action.SuggestionInsertAction;
+
 import test.suggestion.action.SuggestionInsertFormAction;
 import test.suggestion.action.SuggestionListAction;
 
@@ -61,8 +61,6 @@ public class UserActionFactory {
 			action=new SuggestionListAction();
 		}else if(command.equals("/suggestion/suggestion_insert_form")) {
 			action=new SuggestionInsertFormAction();
-		}else if(command.equals("/suggestion/suggestion_list")) {
-			action=new SuggestionInsertAction();
 		}
 		return action;
 	}

@@ -18,25 +18,22 @@ public class SuggestionListAction extends Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		
+//		
+//		HttpSession session = request.getSession();
+//		
+//	
+//		String id=(String)request.getSession().getAttribute("id");
+//		
+//		
+//		NoticeDto dto=new NoticeDto();
+//		
+//		List<NoticeDto> list=NoticeDao.getInstance().getList(dto);	
+//		
+//		request.setAttribute("list", list);
+//		
+		System.out.println("List!!!");
 		
-		HttpSession session = request.getSession();
-		
-	
-		String id=(String)request.getSession().getAttribute("id");
-		
-		
-		NoticeDto dto=new NoticeDto();
-		
-		List<NoticeDto> list=NoticeDao.getInstance().getList(dto);	
-		
-		request.setAttribute("list", list);
-		
-		if(id==null) {
-			return new ActionForward("/views/users/login_form.jsp");
-		}else {
-			return new ActionForward("/views/suggestion/suggestion_list.jsp");
-		}
-
+		return new ActionForward("/views/suggestion/suggestion_list.jsp");
 		
 	}
 
