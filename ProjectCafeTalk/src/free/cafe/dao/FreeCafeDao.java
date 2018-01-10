@@ -8,8 +8,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import free.cafe.dto.FreeCafeDto;
 import free.cafe.mybatis.SqlMapConfig;
 
-
-
 public class FreeCafeDao {
 	private static FreeCafeDao dao;
 	private static SqlSessionFactory factory;
@@ -21,8 +19,7 @@ public class FreeCafeDao {
 		}
 		return dao;
 	}
-	
-	
+		
 	//전체 글의 갯수를 리턴하는 메소드
 	public int getCount(FreeCafeDto dto) {
 		SqlSession session=null;
@@ -34,7 +31,7 @@ public class FreeCafeDao {
 			 *  parameter 를 CafeDto 를 전달한다.
 			 *  parameterType : CafeDto
 			 */
-			count=session.selectOne("cafe.getCount", dto);
+			count=session.selectOne("freecafe.getCount", dto);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -48,7 +45,7 @@ public class FreeCafeDao {
 		SqlSession session=null;
 		try {
 			session=factory.openSession(true);
-			session.update("cafe.update", dto);
+			session.update("freecafe.update", dto);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -81,7 +78,7 @@ public class FreeCafeDao {
 			 *  parameterType : CafeDto
 			 *  resultType : CafeDto
 			 */
-			resultDto=session.selectOne("cafe.getData", dto);
+			resultDto=session.selectOne("freecafe.getData", dto);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -91,11 +88,11 @@ public class FreeCafeDao {
 	}
 	
 	//조회수를 1 증가 시키는 메소드
-	public void increaseViewCount(int num) {
+	public void increaselikeCount(int num) {
 		SqlSession session=null;
 		try {
 			session=factory.openSession(true);
-			session.update("cafe.increaseViewCount", num);
+			session.update("freecafe.increaseLikeCount", num);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -103,10 +100,9 @@ public class FreeCafeDao {
 		}	
 	}
 	
-	
 	//글목록을 리턴해주는 메소드
 	/*
-	 *  인자로 전달된 CafeDto 에는 startRowNum 과 endRowNum 이 
+	 *  인자로 전달된 FreeCafeDto 에는 startRowNum 과 endRowNum 이 
 	 *  들어 있다. 이값을 이용해서 SELECT 한다. 
 	 */
 	public List<FreeCafeDto> getList(FreeCafeDto dto){
@@ -115,12 +111,12 @@ public class FreeCafeDao {
 		try {
 			session=factory.openSession();
 			/*
-			 *  Mapper 의 namespace : cafe
+			 *  Mapper 의 namespace : freecafe
 			 *  sql id : getList
-			 *  parameterType : CafeDto
-			 *  resultType : CafeDto
+			 *  parameterType : FreeCafeDto
+			 *  resultType : FreeCafeDto
 			 */
-			list=session.selectList("cafe.getList", dto);
+			list=session.selectList("freecafe.getList", dto);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

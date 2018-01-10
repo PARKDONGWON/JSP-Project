@@ -38,16 +38,15 @@
   </style>
 </head>
 <body>
-
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav">
       <h4>John's Blog</h4>
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="#section1">홈</a></li>
-        <li><a href="#section2">자유 게시판</a></li>
-        <li><a href="#section3">빈 게시판</a></li>
-        <li><a href="#section3">Photos</a></li>
+        <li><a href="freecafe/freelist.do">자유 게시판</a></li>
+        <li><a href="users/signup_form.do">회원가입</a></li>
+        <li><a href="users/login_form.do?url=${pageContext.request.contextPath }/">로그인</a></li>
       </ul><br>
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search Blog..">

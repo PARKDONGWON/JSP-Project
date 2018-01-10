@@ -5,7 +5,7 @@ public class FreeCafeDto {
 	private String writer; //글 작성자(회원가입 회원의 아이디)
 	private String title; //제목
 	private String content; //내용
-	private int viewCount; //조회수
+	private int likeCount; //좋아요 수 
 	private String regdate;//등록일
 	private int startRowNum; //시작 row 번호
 	private int endRowNum; //끝 row 번호
@@ -14,14 +14,14 @@ public class FreeCafeDto {
 	
 	public FreeCafeDto() {}
 
-	public FreeCafeDto(int num, String writer, String title, String content, int viewCount, String regdate, int startRowNum,
+	public FreeCafeDto(int num, String writer, String title, String content, int likeCount, String regdate, int startRowNum,
 			int endRowNum, int prevNum, int nextNum) {
 		super();
 		this.num = num;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
-		this.viewCount = viewCount;
+		this.likeCount = likeCount;
 		this.regdate = regdate;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
@@ -61,12 +61,12 @@ public class FreeCafeDto {
 		this.content = content;
 	}
 
-	public int getViewCount() {
-		return viewCount;
+	public int getlikeCount() {
+		return likeCount;
 	}
 
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
+	public void setViewCount(int likeCount) {
+		this.likeCount = likeCount;
 	}
 
 	public String getRegdate() {

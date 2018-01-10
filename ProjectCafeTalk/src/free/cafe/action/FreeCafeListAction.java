@@ -19,7 +19,8 @@ public class FreeCafeListAction extends Action{
 	private static final int PAGE_ROW_COUNT=3;
 	//하단 디스플레이 페이지 갯수
 	private static final int PAGE_DISPLAY_COUNT=5;
-	
+	FreeCafeDto dto=new FreeCafeDto();
+
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		/*
@@ -31,11 +32,10 @@ public class FreeCafeListAction extends Action{
 		 *     누른경우
 		 */
 		//검색과 관련된 파라미터를 읽어와 본다.
-		String keyword=request.getParameter("keyword");
+		/*String keyword=request.getParameter("keyword");
 		String condition=request.getParameter("condition");
 		
 		//CafeDto 객체를 생성해서
-		FreeCafeDto dto=new FreeCafeDto();
 		if(keyword != null){ //검색어가 전달된 경우
 			if(condition.equals("titlecontent")){ //제목+내용 검색
 				dto.setTitle(keyword);
@@ -80,21 +80,21 @@ public class FreeCafeListAction extends Action{
 		
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
-		
+		*/
 		//1. 글목록을 불러온다.
-		List<FreeCafeDto> list=FreeCafeDao.getInstance().getList(dto);
+		//List<FreeCafeDto> list=FreeCafeDao.getInstance().getList(dto);
 		//2. request 에 담는다.
-		request.setAttribute("list", list);
+		//request.setAttribute("list", list);
 		
 		// 현재 페이지 번호 
-		request.setAttribute("pageNum", pageNum);
+		/*request.setAttribute("pageNum", pageNum);
 		request.setAttribute("startPageNum", startPageNum);
 		request.setAttribute("endPageNum", endPageNum);
 		// 전체 페이지의 갯수
 		request.setAttribute("totalPageCount", totalPageCount);
-		
+		*/
 		//3. forward 이동해서 글목록 출력하기 
-		return new ActionForward("/views/freecafe/list.jsp");
+		return new ActionForward("/views/freecafe/freelist.jsp");
 	}
 
 }
