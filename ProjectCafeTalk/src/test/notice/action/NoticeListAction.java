@@ -1,11 +1,15 @@
 package test.notice.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import test.controller.Action;
 import test.controller.ActionForward;
+import test.notice.dao.NoticeDao;
+import test.notice.dto.NoticeDto;
 
 public class NoticeListAction extends Action{
 
@@ -20,6 +24,9 @@ public class NoticeListAction extends Action{
 		String id=(String)request.getSession().getAttribute("id");
 		//id를 정상적으로 가져왔는지 확인
 		System.out.println("로그인된 ID:"+id+"입니다.");
+		NoticeDto dto=new NoticeDto();
+		List<NoticeDto> list=NoticeDao.getInstance().getList(dto);	
+		request.setAttribute("list", list);
 		//id가 admin일때 관리자공지사항페이지로 이동한다.
 		if (id.equals("admin")) {
 			System.out.println("관리자공지사항으로이동!");
