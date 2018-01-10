@@ -26,9 +26,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</environments>
 	<!-- sql 문을 정의하고 있는 xml 문서 -->
 	<mappers>
-		<mapper resource="free/cafe/mybatis/UsersMapper.xml"/>
-		<mapper resource="free/cafe/mybatis/CafeMapper.xml"/>
-		<mapper resource="free/cafe/mybatis/CafeCommentMapper.xml"/>
+		<mapper resource="free/cafe/mybatis/FreeCafeMapper.xml"/>
+		<mapper resource="free/cafe/mybatis/FreeCafeCommentMapper.xml"/>
 		<mapper resource="free/cafe/mybatis/FileMapper.xml"/>
 	</mappers>	
 </configuration>
